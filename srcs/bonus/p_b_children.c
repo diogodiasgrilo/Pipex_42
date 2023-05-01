@@ -6,7 +6,7 @@
 /*   By: diogpere <diogpere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:21:49 by diogpere          #+#    #+#             */
-/*   Updated: 2023/05/01 18:45:12 by diogpere         ###   ########.fr       */
+/*   Updated: 2023/05/01 20:10:16 by diogpere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	child_process(pipex_info *info, int argc, char **argv, char **envp)
 {
-    info->pid = fork();
+	info->pid = fork();
     if (info->pid < 0)
 		err_msg_exit(ERR_FORK);
     else if (info->pid == 0)
@@ -23,7 +23,6 @@ void	child_process(pipex_info *info, int argc, char **argv, char **envp)
 		if (info->arg_path == 0)
 			cmd_error(info->args[0]);
 		execve(info->arg_path, info->args, envp);
-		exit(0);
 	}
 	info->old_pipe = dup(info->pipe[0]);
 }
