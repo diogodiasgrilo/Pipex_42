@@ -25,7 +25,7 @@ $(NAME): $(OBJS)
 	@echo "$(ORANGE)Compiling libraries...$(DEFAULT)"
 	@make -C ./libft
 	@mv ./libft/$(LIBFT) .
-	@cc $(CFLAGS) -fsanitize=address $(LIBFT) $(OBJS) -o $(NAME)
+	@cc $(CFLAGS) $(OBJS) -L. $(LIBFT) -o $(NAME) -fsanitize=address
 
 bonus: $(BNS_OBJS)
 	@echo "$(ORANGE)Compiling libraries for bonus...$(DEFAULT)"
