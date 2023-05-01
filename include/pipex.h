@@ -6,7 +6,7 @@
 /*   By: diogpere <diogpere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 15:35:52 by diogpere          #+#    #+#             */
-/*   Updated: 2023/05/01 11:05:50 by diogpere         ###   ########.fr       */
+/*   Updated: 2023/05/01 15:51:14 by diogpere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@
 #include <sys/wait.h>
 #include <errno.h>
 #include <string.h>
-#include "../libft/libft.
-h"
+#include "../libft/libft.h"
 
 # define ERR_INFILE "infile"
 # define ERR_OUTFILE "outfile"
