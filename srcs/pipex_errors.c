@@ -24,7 +24,7 @@ void	err_msg_exit(char *error)
 	exit(1);
 }
 
-void	cmd_error_exit(char *cmd)
+void	cmd_error(char *cmd)
 {
 	char	*temp1;
 	char	*temp2;
@@ -37,5 +37,4 @@ void	cmd_error_exit(char *cmd)
 	write(2, temp2, ft_strlen(temp2));
 	free(temp1);
 	free(temp2);
-	exit(1);
 }

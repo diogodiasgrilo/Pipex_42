@@ -6,7 +6,7 @@
 /*   By: diogpere <diogpere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:20:12 by diogpere          #+#    #+#             */
-/*   Updated: 2023/04/30 14:15:47 by diogpere         ###   ########.fr       */
+/*   Updated: 2023/05/01 18:59:30 by diogpere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ void	child_process(pipex_info *info, char **argv, char **envp)
 	{
 		handle_pipes(info, argv);
 		if (info->arg_path == 0)
-			cmd_error_exit(info->args[0]);
+			cmd_error(info->args[0]);
 		execve(info->arg_path, info->args, envp);
-		// protect here
-		// exit(0);
 	}
 }
 

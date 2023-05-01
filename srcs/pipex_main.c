@@ -62,7 +62,6 @@ int	main(int argc, char **argv, char **envp)
         child_process(info, argv, envp);
         free_split(info->args);
         free(info->arg_path);
-           
     }
     shut_pipe(info);
     waitpid(-1, NULL, 0);

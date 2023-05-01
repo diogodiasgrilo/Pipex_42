@@ -12,19 +12,16 @@
 
 #include "../include/pipex.h"
 
-int	args_prep(pipex_info *info, char **argv)
+void	args_prep(pipex_info *info, char **argv)
 {
 	int	j;
 
 	info->args = ft_split(argv[info->i], ' ');
 	j = -1;
 	while (info->envp_paths[++j])
-	{
 		if (try_paths(info, j))
-			return (1);
-	}
+			return ;
 	info->arg_path = 0;
-	return (-1);
 }
 
 int	try_paths(pipex_info *data, int j)
