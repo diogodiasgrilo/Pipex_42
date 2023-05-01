@@ -10,7 +10,8 @@ SRCS =	./srcs/pipex_main.c \
 BNS_SRCS = ./srcs/bonus/p_b_main.c \
 			./srcs/bonus/p_b_args.c \
 			./srcs/bonus/p_b_children.c \
-			./srcs/bonus/p_b_errors.c		
+			./srcs/bonus/p_b_errors.c \
+			./srcs/bonus/p_b_get_line.c
 
 OBJS :=$(SRCS:.c=.o)
 
@@ -25,13 +26,13 @@ $(NAME): $(OBJS)
 	@echo "$(ORANGE)Compiling libraries...$(DEFAULT)"
 	@make -C ./libft
 	@mv ./libft/$(LIBFT) .
-	@cc $(CFLAGS) $(OBJS) -L. $(LIBFT) -o $(NAME) -fsanitize=address
+	@cc $(CFLAGS) -fsanitize=address $(OBJS) -L. $(LIBFT) -o $(NAME) 
 
 bonus: $(BNS_OBJS)
 	@echo "$(ORANGE)Compiling libraries for bonus...$(DEFAULT)"
 	@make -C ./libft
 	@mv ./libft/$(LIBFT) .
-	cc $(CFLAGS) -fsanitize=address $(LIBFT) $(BNS_OBJS) -o $(NAME)
+	cc $(CFLAGS) -fsanitize=address $(BNS_OBJS) -L. $(LIBFT) -o $(NAME)
 	@echo "$(GREEN)Bonus compiled and completed!$(DEFAULT)"
 
 tester: $(SRCS)
