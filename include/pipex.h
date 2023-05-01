@@ -6,7 +6,7 @@
 /*   By: diogpere <diogpere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 15:35:52 by diogpere          #+#    #+#             */
-/*   Updated: 2023/05/01 15:51:14 by diogpere         ###   ########.fr       */
+/*   Updated: 2023/05/01 11:05:50 by diogpere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ typedef struct s_data
 
 void	free_split(char **);
 void	shut_pipe(pipex_info *);
-void	cmd_error_exit(char *cmd);
+void	cmd_error(char *cmd);
 void	err_msg_exit(char *error);
 int		sort_arg(pipex_info *info);
 int		custm_err_msg(char *error);
 int		check_char(pipex_info *info);
 int		try_paths(pipex_info *data, int j);
 void	handle_pipes(pipex_info *, char **);
-int		args_prep(pipex_info *info, char **argv);
+void	args_prep(pipex_info *info, char **argv);
 void	child_process(pipex_info *info, char **argv, char **envp);
 
 #endif
