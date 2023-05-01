@@ -6,7 +6,7 @@
 /*   By: diogpere <diogpere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 15:35:52 by diogpere          #+#    #+#             */
-/*   Updated: 2023/05/01 11:05:50 by diogpere         ###   ########.fr       */
+/*   Updated: 2023/05/01 20:45:11 by diogpere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,18 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
-#include <fcntl.h>
-#include <sys/wait.h>
-#include <errno.h>
-#include <string.h>
-#include "../libft/libft.h"
+# include <fcntl.h>
+# include <sys/wait.h>
+# include <errno.h>
+# include <string.h>
+# include "../libft/libft.h"
 
 # define ERR_INFILE "infile"
 # define ERR_OUTFILE "outfile"
 # define ERR_INPUT "invalid number of arguments.\n"
 # define ERR_PATHS "couldn't find paths.\n"
 # define ERR_PIPE "pipe"
+# define ERR_DUP2 "dup2 failed"
 # define ERR_FORK "fork failed"
 # define ERR_CMD1 "command not found: "
 # define ERR_CMD2 "no such file or directory: "
@@ -43,18 +44,18 @@ typedef struct s_data
 	int		pid;
 	int		infile;
 	int		outfile;
-}               pipex_info;
+}			t_info;
 
-void	free_split(char **);
-void	shut_pipe(pipex_info *);
 void	cmd_error(char *cmd);
+int		sort_arg(t_info *info);
+void	shut_pipe(t_info *info);
+int		check_char(t_info *info);
 void	err_msg_exit(char *error);
-int		sort_arg(pipex_info *info);
+void	free_split(char **strings);
 int		custm_err_msg(char *error);
-int		check_char(pipex_info *info);
-int		try_paths(pipex_info *data, int j);
-void	handle_pipes(pipex_info *, char **);
-void	args_prep(pipex_info *info, char **argv);
-void	child_process(pipex_info *info, char **argv, char **envp);
+int		path_check(t_info *data, int j);
+void	args_prep(t_info *info, char **argv);
+void	handle_pipes(t_info *info, char **argv);
+void	child_process(t_info *info, char **argv, char **envp);
 
 #endif
