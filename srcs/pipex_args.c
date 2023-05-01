@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_paths.c                                      :+:      :+:    :+:   */
+/*   pipex_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: diogpere <diogpere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 09:02:43 by diogpere          #+#    #+#             */
-/*   Updated: 2023/04/28 15:24:35 by diogpere         ###   ########.fr       */
+/*   Updated: 2023/05/01 20:44:58 by diogpere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-void	args_prep(pipex_info *info, char **argv)
+void	args_prep(t_info *info, char **argv)
 {
 	int	j;
 
 	info->args = ft_split(argv[info->i], ' ');
 	j = -1;
 	while (info->envp_paths[++j])
-		if (try_paths(info, j))
+		if (path_check(info, j))
 			return ;
 	info->arg_path = 0;
 }
 
-int	try_paths(pipex_info *data, int j)
+int	path_check(t_info *data, int j)
 {
 	char	*temp1;
 	char	*temp2;
@@ -45,7 +45,7 @@ int	try_paths(pipex_info *data, int j)
 	return (0);
 }
 
-int	check_char(pipex_info *info)
+int	check_char(t_info *info)
 {
 	int		j;
 
@@ -58,7 +58,7 @@ int	check_char(pipex_info *info)
 	return (0);
 }
 
-int	sort_arg(pipex_info *info)
+int	sort_arg(t_info *info)
 {
 	char	*temp;
 
