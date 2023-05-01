@@ -6,25 +6,23 @@
 /*   By: diogpere <diogpere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 09:02:43 by diogpere          #+#    #+#             */
-/*   Updated: 2023/05/01 08:51:14 by diogpere         ###   ########.fr       */
+/*   Updated: 2023/05/01 18:35:16 by diogpere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex_bonus.h"
 
-int	args_prep(pipex_info *info, char **argv)
+void	args_prep(pipex_info *info, char **argv)
 {
 	int	j;
-
+	if (info->i == 2 && info->here_doc)
+		info->i += 1;
 	info->args = ft_split(argv[info->i], ' ');
 	j = -1;
 	while (info->envp_paths[++j])
-	{
 		if (try_paths(info, j))
-			return (1);
-	}
+			return ;
 	info->arg_path = 0;
-	return (-1);
 }
 
 int	try_paths(pipex_info *data, int j)

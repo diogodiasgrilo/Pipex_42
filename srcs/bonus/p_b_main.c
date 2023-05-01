@@ -6,7 +6,7 @@
 /*   By: diogpere <diogpere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 15:03:37 by diogpere          #+#    #+#             */
-/*   Updated: 2023/05/01 08:24:45 by diogpere         ###   ########.fr       */
+/*   Updated: 2023/05/01 18:40:49 by diogpere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,14 @@ int	main(int argc, char **argv, char **envp)
     info->i = 1;
     if (!get_paths(info, envp))
 		return (custm_err_msg(ERR_PATHS));
+	if (!(ft_strncmp("here_doc", argv[1], 8)))
+	{
+		info->here_doc = open("tmp.txt", O_CREAT| O_TRUNC | O_RDWR , 0644);
+		while (1)
+			if (!(get_line(info->here_doc, argv[2])))
+				break;
+		close(info->here_doc);
+	}
     while ((++(info->i) <= argc - 2))
     {
 		if (pipe(info->pipe) < 0)
@@ -67,6 +75,7 @@ int	main(int argc, char **argv, char **envp)
     }
 	// info->i = -1;
     waitpid(-1, 0, 0);
+	unlink("tmp.txt");
     free_split(info->envp_paths);
     free(info);
     return (0);

@@ -6,7 +6,7 @@
 /*   By: diogpere <diogpere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:21:49 by diogpere          #+#    #+#             */
-/*   Updated: 2023/04/28 17:00:21 by diogpere         ###   ########.fr       */
+/*   Updated: 2023/05/01 18:45:12 by diogpere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	child_process(pipex_info *info, int argc, char **argv, char **envp)
 	{
 		handle_pipes(info, argc, argv);
 		if (info->arg_path == 0)
-			cmd_error_exit(info->args[0]);
+			cmd_error(info->args[0]);
 		execve(info->arg_path, info->args, envp);
 		exit(0);
 	}
@@ -30,9 +30,12 @@ void	child_process(pipex_info *info, int argc, char **argv, char **envp)
 
 void	handle_pipes(pipex_info *info, int argc, char **argv)
 {
-	if (info->i == 2)
+	if (info->i == 2 || (info->i == 3 && info->here_doc))
 	{
-		info->infile = open(argv[1], O_RDONLY);
+		if (!info->here_doc)
+			info->infile = open(argv[1], O_RDONLY);
+		else
+			info->infile = open("tmp.txt", O_RDONLY);
 		if (info->infile < 0)
 			err_msg_exit(ERR_INFILE);
 		dup2(info->infile, STDIN_FILENO);
