@@ -6,7 +6,7 @@
 /*   By: diogpere <diogpere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:41:55 by diogpere          #+#    #+#             */
-/*   Updated: 2023/05/01 20:08:58 by diogpere         ###   ########.fr       */
+/*   Updated: 2023/05/01 21:25:09 by diogpere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ int	get_line(int fd, char *delim)
 	if (*buffer || read(0, buffer, BUFFER_SIZE) > 0)
 		line = line_join(line, buffer);
 	(ft_tidy(buffer));
-	if (!ft_strncmp(delim, line, ft_strlen(line) - 1))
+	if (!ft_strncmp(delim, line, ft_strlen(delim)) && \
+		!ft_strncmp(delim, line, ft_strlen(line) - 1))
 	{
 		free(line);
 		return (0);

@@ -6,18 +6,18 @@
 /*   By: diogpere <diogpere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:21:49 by diogpere          #+#    #+#             */
-/*   Updated: 2023/05/01 20:10:16 by diogpere         ###   ########.fr       */
+/*   Updated: 2023/05/01 21:55:30 by diogpere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex_bonus.h"
 
-void	child_process(pipex_info *info, int argc, char **argv, char **envp)
+void	child_process(t_info *info, int argc, char **argv, char **envp)
 {
 	info->pid = fork();
-    if (info->pid < 0)
+	if (info->pid < 0)
 		err_msg_exit(ERR_FORK);
-    else if (info->pid == 0)
+	else if (info->pid == 0)
 	{
 		handle_pipes(info, argc, argv);
 		if (info->arg_path == 0)
@@ -27,9 +27,17 @@ void	child_process(pipex_info *info, int argc, char **argv, char **envp)
 	info->old_pipe = dup(info->pipe[0]);
 }
 
-void	handle_pipes(pipex_info *info, int argc, char **argv)
+void	mid_pipes(t_info *info)
 {
-	if (info->i == 2 || (info->i == 3 && info->here_doc))
+	dup2(info->pipe[1], STDOUT_FILENO);
+	dup2(info->old_pipe, STDIN_FILENO);
+}
+
+void	handle_pipes(t_info *info, int argc, char **argv)
+{
+	if (info->i > 2 && info->i < argc - 2)
+		mid_pipes(info);
+	else if (info->i == 2 || (info->i == 3 && info->here_doc))
 	{
 		if (!info->here_doc)
 			info->infile = open(argv[1], O_RDONLY);
@@ -41,12 +49,7 @@ void	handle_pipes(pipex_info *info, int argc, char **argv)
 		dup2(info->pipe[1], STDOUT_FILENO);
 		close(info->infile);
 	}
-	if (info->i > 2 && info->i < argc - 2)
-	{
-		dup2(info->pipe[1], STDOUT_FILENO);
-		dup2(info->old_pipe, STDIN_FILENO);
-	}
-	if (info->i == argc - 2)
+	else if (info->i == argc - 2)
 	{
 		info->outfile = open(argv[argc - 1], O_TRUNC | O_CREAT | O_RDWR, 0644);
 		if (info->outfile < 0)
