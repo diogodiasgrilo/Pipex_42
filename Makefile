@@ -26,13 +26,13 @@ $(NAME): $(OBJS)
 	@echo "$(ORANGE)Compiling libraries...$(DEFAULT)"
 	@make -C ./libft
 	@mv ./libft/$(LIBFT) .
-	@cc $(CFLAGS) -fsanitize=address $(OBJS) -L. $(LIBFT) -o $(NAME) 
+	@cc $(CFLAGS) -g -fsanitize=address $(OBJS) -L. $(LIBFT) -o $(NAME) 
 
 bonus: $(BNS_OBJS)
 	@echo "$(ORANGE)Compiling libraries for bonus...$(DEFAULT)"
 	@make -C ./libft
 	@mv ./libft/$(LIBFT) .
-	cc $(CFLAGS) -fsanitize=address $(BNS_OBJS) -L. $(LIBFT) -o $(NAME)
+	cc $(CFLAGS) -fsanitize=address -g $(BNS_OBJS) -L. $(LIBFT) -o $(NAME)
 	@echo "$(GREEN)Bonus compiled and completed!$(DEFAULT)"
 
 tester: $(SRCS)
