@@ -64,7 +64,8 @@ int	main(int argc, char **argv, char **envp)
 		free(info->arg_path);
 	}
 	shut_pipe(info);
-	waitpid(-1, NULL, 0);
+	while (info->i-- != argc - 3)
+		waitpid(-1, NULL, 0);
 	free_split(info->envp_paths);
 	free(info);
 	return (0);
