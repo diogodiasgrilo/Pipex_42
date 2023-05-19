@@ -68,7 +68,7 @@ int	sort_arg(t_info *info)
 	{
 		if (access(info->args[0], F_OK) == 0)
 		{
-			info->arg_path = strdup(info->args[0]);
+			info->arg_path = ft_strdup(info->args[0]);
 			return (1);
 		}
 	}
