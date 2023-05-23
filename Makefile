@@ -17,7 +17,7 @@ OBJS :=$(SRCS:.c=.o)
 
 BNS_OBJS :=$(BNS_SRCS:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 all: $(NAME)
 	@echo "$(GREEN)Bu-pau...pipex MADE!$(DEFAULT)"
@@ -26,13 +26,13 @@ $(NAME): $(OBJS)
 	@echo "$(ORANGE)Compiling libraries...$(DEFAULT)"
 	@make -C ./libft
 	@mv ./libft/$(LIBFT) .
-	@cc $(CFLAGS) -g -fsanitize=address $(OBJS) -L. $(LIBFT) -o $(NAME) 
+	@cc $(CFLAGS) $(OBJS) -L. $(LIBFT) -o $(NAME)
 
 bonus: $(BNS_OBJS)
 	@echo "$(ORANGE)Compiling libraries for bonus...$(DEFAULT)"
 	@make -C ./libft
 	@mv ./libft/$(LIBFT) .
-	cc $(CFLAGS) -fsanitize=address -g $(BNS_OBJS) -L. $(LIBFT) -o $(NAME)
+	cc $(CFLAGS) $(BNS_OBJS) -L. $(LIBFT) -o $(NAME)
 	@echo "$(GREEN)Bonus compiled and completed!$(DEFAULT)"
 
 tester: $(SRCS)
