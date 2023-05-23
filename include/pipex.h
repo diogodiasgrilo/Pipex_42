@@ -6,7 +6,7 @@
 /*   By: diogpere <diogpere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 15:35:52 by diogpere          #+#    #+#             */
-/*   Updated: 2023/05/01 20:45:11 by diogpere         ###   ########.fr       */
+/*   Updated: 2023/05/02 16:06:41 by diogpere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ void	err_msg_exit(char *error);
 void	free_split(char **strings);
 int		custm_err_msg(char *error);
 int		path_check(t_info *data, int j);
-void	args_prep(t_info *info, char **argv);
+int		args_prep(t_info *info, char **argv);
 void	handle_pipes(t_info *info, char **argv);
 void	child_process(t_info *info, char **argv, char **envp);
+void	check_file_error(t_info *info, int argc, char *argv[]);
 
 #endif
